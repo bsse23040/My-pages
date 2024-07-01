@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRAujla</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+        * {
+            margin: 5vh 2vh;
+        }
+
+        body {
+            background-color: rgb(2, 45, 2);
+            color: rgb(29, 218, 29);
+            font-size: x-large;
+            font-weight: bold;
+            font-family: "Caveat";
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+
+        const addItem = async (item) => {
+            await randomDelay();
+            let div = document.createElement("div");
+            div.innerHTML = item;
+            document.body.append(div);
+        }
+
+        const randomDelay = () => {
+            return new Promise((resolve, reject) => {
+                let timeOut = 1 + 6 * Math.random();
+                setTimeout(() => {
+                    resolve();
+                }, timeOut * 1000);
+            });
+        }
+
+        async function main() {
+            let t = setInterval(() => {
+                let x = document.body.lastElementChild;
+                if (x && x.innerHTML.endsWith(" ❗")) {
+                    x.innerHTML = x.innerHTML.slice(0, x.innerHTML.length - 2);
+                } else if (x) {
+                    x.innerHTML = x.innerHTML + " ❗";
+                }
+            }, 500);
+
+            let text = ["Initialized Local-storage mining",
+                "Password files Detected",
+                "Extracting your files",
+                "Sending data to \"Aujla's\" server",
+                "Cleaning credentials"];
+            for (const item of text) {
+                await addItem(item);
+                let last = document.body.lastElementChild;
+                let secondLast = document.body.children[document.body.children.length - 2];
+                clearInterval(t);  // Stop the blinking effect
+
+                if (secondLast && secondLast.innerHTML.endsWith(" ❗")) {
+                    secondLast.innerHTML = secondLast.innerHTML.slice(0, secondLast.innerHTML.length - 2);
+                }
+                secondLast.innerHTML += "  ✅";
+
+                // Restart the blinking effect
+                t = setInterval(() => {
+                    let x = document.body.lastElementChild;
+                    if (x && x.innerHTML.endsWith(" ❗")) {
+                        x.innerHTML = x.innerHTML.slice(0, x.innerHTML.length - 2);
+                    } else if (x) {
+                        x.innerHTML = x.innerHTML + " ❗";
+                    }
+                }, 500);
+            }
+            await randomDelay();
+            clearInterval(t);
+            let last = document.body.lastElementChild;
+            if (last && last.innerHTML.endsWith("❗")) {
+                last.innerHTML = last.innerHTML.slice(0, last.innerHTML.length - 1);
+            }
+            last.innerHTML += " ✅";
+            alert('A malicious site is fetching your critical data!!! Use a virus-scanner or close this site');
+        }
+        main();
+    </script>
+</body>
+
+</html>
